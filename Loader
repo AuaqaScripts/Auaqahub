@@ -1,330 +1,389 @@
---[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.9) ~  Much Love, Ferib 
+--!native
+print("UI Loader w/ Confirmation & Key System v3.6: Initializing...")
 
-]]--
-
-print("UI Loader w/ Confirmation & Key System v3.5: Initializing...");
 local success, err = pcall(function()
-	local TweenService = game:GetService("TweenService");
-	local Players = game:GetService("Players");
-	local PlayerGui = Players.LocalPlayer:WaitForChild("PlayerGui");
-	local SCRIPT_URL = "https://gist.githubusercontent.com/AuaqaScripts/048ebb7f2986b702d83416b07967667a/raw/ab920ec38178075c197a62f042563ead75781f4e/Auaqa's%2520Universal%2520Aimbot";
-	local CORRECT_KEY = "8Vjhvmal";
-	local DISCORD_LINK = "https://discord.gg/gsejE5P9fK";
-	if PlayerGui:FindFirstChild("LoaderGUI") then
-		PlayerGui:FindFirstChild("LoaderGUI"):Destroy();
-	end
-	local ScreenGui = Instance.new("ScreenGui");
-	ScreenGui.Name = "LoaderGUI";
-	ScreenGui.ResetOnSpawn = false;
-	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
-	ScreenGui.IgnoreGuiInset = true;
-	local MainFrame = Instance.new("Frame");
-	MainFrame.Size = UDim2.new(0, 340, 0, 140);
-	MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0);
-	MainFrame.AnchorPoint = Vector2.new(0.5, 0.5);
-	MainFrame.BackgroundColor3 = Color3.fromRGB(30, 32, 40);
-	MainFrame.BackgroundTransparency = 1;
-	MainFrame.ClipsDescendants = true;
-	MainFrame.Parent = ScreenGui;
-	local UIGradient = Instance.new("UIGradient", MainFrame);
-	UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromRGB(45, 48, 58)),ColorSequenceKeypoint.new(1, Color3.fromRGB(30, 32, 40))});
-	UIGradient.Rotation = 90;
-	local UICorner = Instance.new("UICorner", MainFrame);
-	UICorner.CornerRadius = UDim.new(0, 12);
-	local UIStroke = Instance.new("UIStroke", MainFrame);
-	UIStroke.Color = Color3.fromRGB(90, 95, 110);
-	UIStroke.Thickness = 1;
-	UIStroke.Transparency = 1;
-	local ConfirmationContainer = Instance.new("Frame", MainFrame);
-	ConfirmationContainer.Size = UDim2.new(1, 0, 1, 0);
-	ConfirmationContainer.BackgroundTransparency = 1;
-	local Title = Instance.new("TextLabel", ConfirmationContainer);
-	Title.Size = UDim2.new(1, -40, 0, 30);
-	Title.Position = UDim2.new(0.5, 0, 0, 20);
-	Title.AnchorPoint = Vector2.new(0.5, 0);
-	Title.BackgroundTransparency = 1;
-	Title.Font = Enum.Font.GothamSemibold;
-	Title.Text = "Are you sure you want to load this script?";
-	Title.TextColor3 = Color3.fromRGB(230, 230, 240);
-	Title.TextSize = 18;
-	local Subtitle = Instance.new("TextLabel", ConfirmationContainer);
-	Subtitle.Size = UDim2.new(1, -40, 0, 20);
-	Subtitle.Position = UDim2.new(0.5, 0, 0, 45);
-	Subtitle.AnchorPoint = Vector2.new(0.5, 0);
-	Subtitle.BackgroundTransparency = 1;
-	Subtitle.Font = Enum.Font.Gotham;
-	Subtitle.Text = "Made By Auaqa";
-	Subtitle.TextColor3 = Color3.fromRGB(150, 155, 170);
-	Subtitle.TextSize = 14;
-	local ButtonContainer = Instance.new("Frame", ConfirmationContainer);
-	ButtonContainer.Size = UDim2.new(1, -40, 0, 40);
-	ButtonContainer.Position = UDim2.new(0.5, 0, 1, -20);
-	ButtonContainer.AnchorPoint = Vector2.new(0.5, 1);
-	ButtonContainer.BackgroundTransparency = 1;
-	local UIListLayout = Instance.new("UIListLayout", ButtonContainer);
-	UIListLayout.FillDirection = Enum.FillDirection.Horizontal;
-	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center;
-	UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center;
-	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder;
-	UIListLayout.Padding = UDim.new(0, 10);
-	local YesButton = Instance.new("TextButton", ButtonContainer);
-	YesButton.Size = UDim2.new(0.5, -5, 1, 0);
-	YesButton.BackgroundColor3 = Color3.fromRGB(80, 130, 255);
-	YesButton.Font = Enum.Font.GothamBold;
-	YesButton.Text = "Yes";
-	YesButton.TextColor3 = Color3.fromRGB(255, 255, 255);
-	YesButton.TextSize = 16;
-	Instance.new("UICorner", YesButton).CornerRadius = UDim.new(0, 8);
-	local NoButton = Instance.new("TextButton", ButtonContainer);
-	NoButton.Size = UDim2.new(0.5, -5, 1, 0);
-	NoButton.BackgroundColor3 = Color3.fromRGB(70, 75, 90);
-	NoButton.Font = Enum.Font.GothamBold;
-	NoButton.Text = "No";
-	NoButton.TextColor3 = Color3.fromRGB(220, 220, 230);
-	NoButton.TextSize = 16;
-	Instance.new("UICorner", NoButton).CornerRadius = UDim.new(0, 8);
-	ScreenGui.Parent = PlayerGui;
-	local function animateIn(target)
-		target.Size = UDim2.new(target.Size.X.Scale, target.Size.X.Offset * 0.9, target.Size.Y.Scale, target.Size.Y.Offset * 0.9);
-		local sizeAnim = TweenService:Create(target, TweenInfo.new(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size=UDim2.new(0, 340, 0, 140)});
-		local fadeAnim = TweenService:Create(target, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {BackgroundTransparency=0});
-		local strokeAnim = TweenService:Create(UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Transparency=0.6});
-		sizeAnim:Play();
-		fadeAnim:Play();
-		strokeAnim:Play();
-	end
-	local function animateOut(target, callback)
-		local sizeAnim = TweenService:Create(target, TweenInfo.new(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {Size=UDim2.new(target.Size.X.Scale, target.Size.X.Offset * 0.9, target.Size.Y.Scale, target.Size.Y.Offset * 0.9)});
-		local fadeAnim = TweenService:Create(target, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {BackgroundTransparency=1});
-		local strokeAnim = TweenService:Create(UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {Transparency=1});
-		sizeAnim:Play();
-		fadeAnim:Play();
-		strokeAnim:Play();
-		fadeAnim.Completed:Connect(callback);
-	end
-	local function showPopoutMessage(message, color)
-		local PopoutFrame = Instance.new("Frame");
-		PopoutFrame.Name = "PopoutMessage";
-		PopoutFrame.Size = UDim2.new(0, 280, 0, 50);
-		PopoutFrame.Position = UDim2.new(1, PopoutFrame.Size.X.Offset + 10, 1, -40);
-		PopoutFrame.AnchorPoint = Vector2.new(1, 1);
-		PopoutFrame.BackgroundColor3 = Color3.fromRGB(30, 32, 40);
-		PopoutFrame.BackgroundTransparency = 0;
-		PopoutFrame.Parent = ScreenGui;
-		local PopoutText = Instance.new("TextLabel");
-		PopoutText.Size = UDim2.new(1, 0, 1, 0);
-		PopoutText.BackgroundTransparency = 1;
-		PopoutText.Font = Enum.Font.Gotham;
-		PopoutText.Text = message;
-		PopoutText.TextColor3 = color or Color3.fromRGB(230, 230, 240);
-		PopoutText.TextSize = 16;
-		PopoutText.TextXAlignment = Enum.TextXAlignment.Center;
-		PopoutText.TextYAlignment = Enum.TextYAlignment.Center;
-		PopoutText.Parent = PopoutFrame;
-		Instance.new("UICorner", PopoutFrame).CornerRadius = UDim.new(0, 8);
-		Instance.new("UIStroke", PopoutFrame).Color = Color3.fromRGB(90, 95, 110);
-		local slideInTween = TweenService:Create(PopoutFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position=UDim2.new(1, -10, 1, -40)});
-		slideInTween:Play();
-		task.wait(3);
-		local slideOutTween = TweenService:Create(PopoutFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.In), {Position=UDim2.new(1, PopoutFrame.Size.X.Offset + 10, 1, -40)});
-		local fadeOutTextTween = TweenService:Create(PopoutText, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {TextTransparency=1});
-		slideOutTween:Play();
-		fadeOutTextTween:Play();
-		slideOutTween.Completed:Connect(function()
-			PopoutFrame:Destroy();
-		end);
-	end
-	local function showWrongKeyMessage()
-		showPopoutMessage("Wrong key", Color3.fromRGB(255, 80, 80));
-	end
-	animateIn(MainFrame);
-	NoButton.MouseButton1Click:Connect(function()
-		animateOut(MainFrame, function()
-			ScreenGui:Destroy();
-		end);
-	end);
-	YesButton.MouseButton1Click:Connect(function()
-		YesButton.AutoButtonColor = false;
-		NoButton.AutoButtonColor = false;
-		local fadeOutInfo = TweenInfo.new(0.3);
-		for _, child in ipairs(ConfirmationContainer:GetDescendants()) do
-			if (child:IsA("TextLabel") or child:IsA("TextButton")) then
-				TweenService:Create(child, fadeOutInfo, {TextTransparency=1}):Play();
-			end
-			if child:IsA("TextButton") then
-				TweenService:Create(child, fadeOutInfo, {BackgroundTransparency=1}):Play();
-			end
-		end
-		task.wait(fadeOutInfo.Time);
-		ConfirmationContainer:Destroy();
-		local KeySystemContainer = Instance.new("Frame", MainFrame);
-		KeySystemContainer.Size = UDim2.new(1, 0, 1, 0);
-		KeySystemContainer.BackgroundColor3 = Color3.fromRGB(25, 27, 34);
-		KeySystemContainer.BackgroundTransparency = 0;
-		local KeyUIGradient = Instance.new("UIGradient", KeySystemContainer);
-		KeyUIGradient.Color = UIGradient.Color;
-		KeyUIGradient.Rotation = UIGradient.Rotation;
-		local KeyUICorner = Instance.new("UICorner", KeySystemContainer);
-		KeyUICorner.CornerRadius = UICorner.CornerRadius;
-		local KeyUIStroke = Instance.new("UIStroke", KeySystemContainer);
-		KeyUIStroke.Color = UIStroke.Color;
-		KeyUIStroke.Thickness = UIStroke.Thickness;
-		KeyUIStroke.Transparency = UIStroke.Transparency;
-		local KeyTitle = Instance.new("TextLabel", KeySystemContainer);
-		KeyTitle.Size = UDim2.new(1, -40, 0, 30);
-		KeyTitle.Position = UDim2.new(0.5, 0, 0, 20);
-		KeyTitle.AnchorPoint = Vector2.new(0.5, 0);
-		KeyTitle.BackgroundTransparency = 1;
-		KeyTitle.Font = Enum.Font.GothamSemibold;
-		KeyTitle.Text = "Key System";
-		KeyTitle.TextColor3 = Color3.fromRGB(230, 230, 240);
-		KeyTitle.TextSize = 18;
-		local KeyStatus = Instance.new("TextLabel", KeySystemContainer);
-		KeyStatus.Size = UDim2.new(1, -40, 0, 20);
-		KeyStatus.Position = UDim2.new(0.5, 0, 0, 45);
-		KeyStatus.AnchorPoint = Vector2.new(0.5, 0);
-		KeyStatus.BackgroundTransparency = 1;
-		KeyStatus.Font = Enum.Font.Gotham;
-		KeyStatus.Text = "";
-		KeyStatus.TextColor3 = Color3.fromRGB(150, 155, 170);
-		KeyStatus.TextSize = 14;
-		local KeyInput = Instance.new("TextBox", KeySystemContainer);
-		KeyInput.Size = UDim2.new(1, -40, 0, 40);
-		KeyInput.Position = UDim2.new(0.5, 0, 0.5, -25);
-		KeyInput.AnchorPoint = Vector2.new(0.5, 0.5);
-		KeyInput.BackgroundColor3 = Color3.fromRGB(45, 48, 58);
-		KeyInput.BackgroundTransparency = 0;
-		KeyInput.PlaceholderText = "Enter key here";
-		KeyInput.PlaceholderColor3 = Color3.fromRGB(150, 155, 170);
-		KeyInput.TextColor3 = Color3.fromRGB(230, 230, 240);
-		KeyInput.TextSize = 16;
-		KeyInput.Font = Enum.Font.Gotham;
-		Instance.new("UICorner", KeyInput).CornerRadius = UDim.new(0, 8);
-		local KeyButtonContainer = Instance.new("Frame", KeySystemContainer);
-		KeyButtonContainer.Size = UDim2.new(1, -40, 0, 40);
-		KeyButtonContainer.Position = UDim2.new(0.5, 0, 0.5, 25);
-		KeyButtonContainer.AnchorPoint = Vector2.new(0.5, 0.5);
-		KeyButtonContainer.BackgroundTransparency = 1;
-		local KeyUIListLayout = Instance.new("UIListLayout", KeyButtonContainer);
-		KeyUIListLayout.FillDirection = Enum.FillDirection.Horizontal;
-		KeyUIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center;
-		KeyUIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center;
-		KeyUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder;
-		UIListLayout.Padding = UDim.new(0, 10);
-		local GetKeyButton = Instance.new("TextButton", KeyButtonContainer);
-		GetKeyButton.Size = UDim2.new(0.5, -5, 1, 0);
-		GetKeyButton.BackgroundTransparency = 0;
-		GetKeyButton.BackgroundColor3 = Color3.fromRGB(80, 130, 255);
-		GetKeyButton.Font = Enum.Font.GothamBold;
-		GetKeyButton.Text = "Get Key";
-		GetKeyButton.TextTransparency = 0;
-		GetKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255);
-		GetKeyButton.TextSize = 16;
-		Instance.new("UICorner", GetKeyButton).CornerRadius = UDim.new(0, 8);
-		local CheckKeyButton = Instance.new("TextButton", KeyButtonContainer);
-		CheckKeyButton.Size = UDim2.new(0.5, -5, 1, 0);
-		CheckKeyButton.BackgroundTransparency = 0;
-		CheckKeyButton.BackgroundColor3 = Color3.fromRGB(70, 75, 90);
-		CheckKeyButton.Font = Enum.Font.GothamBold;
-		CheckKeyButton.Text = "Check Key";
-		CheckKeyButton.TextTransparency = 0;
-		CheckKeyButton.TextColor3 = Color3.fromRGB(220, 220, 230);
-		CheckKeyButton.TextSize = 16;
-		Instance.new("UICorner", CheckKeyButton).CornerRadius = UDim.new(0, 8);
-		local fadeInInfo = TweenInfo.new(0.5);
-		TweenService:Create(KeySystemContainer, fadeInInfo, {BackgroundTransparency=0}):Play();
-		GetKeyButton.MouseButton1Click:Connect(function()
-			if setclipboard then
-				setclipboard(DISCORD_LINK);
-				showPopoutMessage("Copied link to clipboard");
-			else
-				KeyStatus.Text = "Your exploit does not support setclipboard().";
-				KeyStatus.TextColor3 = Color3.fromRGB(255, 80, 80);
-				task.wait(2);
-				KeyStatus.Text = "";
-				KeyStatus.TextColor3 = Color3.fromRGB(150, 155, 170);
-			end
-		end);
-		CheckKeyButton.MouseButton1Click:Connect(function()
-			if (KeyInput.Text == CORRECT_KEY) then
-				KeyStatus.Text = "Key Verified! Loading script...";
-				KeyStatus.TextColor3 = Color3.fromRGB(80, 255, 130);
-				local function startLoadingProcess()
-					local fadeOutInfo2 = TweenInfo.new(0.3);
-					for _, child in ipairs(KeySystemContainer:GetDescendants()) do
-						if (child:IsA("TextLabel") or child:IsA("TextButton") or child:IsA("TextBox")) then
-							TweenService:Create(child, fadeOutInfo2, {TextTransparency=1,BackgroundTransparency=1}):Play();
-						end
-					end
-					task.wait(fadeOutInfo2.Time);
-					KeySystemContainer:Destroy();
-					local LoadingContainer = Instance.new("Frame", MainFrame);
-					LoadingContainer.Size = UDim2.new(1, 0, 1, 0);
-					LoadingContainer.BackgroundTransparency = 1;
-					TweenService:Create(MainFrame, TweenInfo.new(0.4), {Size=UDim2.new(0, 280, 0, 80)}):Play();
-					local ProgressText = Instance.new("TextLabel", LoadingContainer);
-					ProgressText.Size = UDim2.new(1, -40, 0, 30);
-					ProgressText.Position = UDim2.new(0.5, 0, 0.5, -10);
-					ProgressText.AnchorPoint = Vector2.new(0.5, 0.5);
-					ProgressText.BackgroundTransparency = 1;
-					ProgressText.Font = Enum.Font.Gotham;
-					ProgressText.Text = "Initializing...";
-					ProgressText.TextColor3 = Color3.fromRGB(230, 230, 240);
-					ProgressText.TextTransparency = 1;
-					ProgressText.TextSize = 18;
-					local ProgressBarBG = Instance.new("Frame", LoadingContainer);
-					ProgressBarBG.Size = UDim2.new(1, -40, 0, 8);
-					ProgressBarBG.Position = UDim2.new(0.5, 0, 0.5, 15);
-					ProgressBarBG.AnchorPoint = Vector2.new(0.5, 0.5);
-					ProgressBarBG.BackgroundColor3 = Color3.fromRGB(20, 22, 28);
-					ProgressBarBG.BackgroundTransparency = 1;
-					Instance.new("UICorner", ProgressBarBG).CornerRadius = UDim.new(1, 0);
-					local ProgressBar = Instance.new("Frame", ProgressBarBG);
-					ProgressBar.Size = UDim2.new(0, 0, 1, 0);
-					ProgressBar.BackgroundColor3 = Color3.fromRGB(80, 130, 255);
-					Instance.new("UICorner", ProgressBar).CornerRadius = UDim.new(1, 0);
-					local fadeInInfo2 = TweenInfo.new(0.5);
-					TweenService:Create(ProgressText, fadeInInfo2, {TextTransparency=0}):Play();
-					TweenService:Create(ProgressBarBG, fadeInInfo2, {BackgroundTransparency=0}):Play();
-					task.wait(0.5);
-					local progressAnim = TweenService:Create(ProgressBar, TweenInfo.new(10, Enum.EasingStyle.Linear), {Size=UDim2.new(1, 0, 1, 0)});
-					progressAnim:Play();
-					progressAnim.Completed:Wait();
-					ProgressText.Text = "Complete!";
-					task.wait(2);
-					animateOut(MainFrame, function()
-						ScreenGui:Destroy();
-						print("Neat UI Loader: UI closed. Loading main script now...");
-						local getSuccess, scriptSource = pcall(function()
-							return game:HttpGet(SCRIPT_URL);
-						end);
-						if (getSuccess and scriptSource) then
-							local loadSuccess, loadError = pcall(loadstring(scriptSource));
-							if not loadSuccess then
-								warn("Neat UI Loader: Error executing main script:", loadError);
-							else
-								print("Neat UI Loader: Main script executed successfully.");
-							end
-						else
-							warn("Neat UI Loader: Failed to download script from URL:", scriptSource);
-						end
-					end);
-				end
-				startLoadingProcess();
-			else
-				showWrongKeyMessage();
-				KeyStatus.Text = "";
-			end
-		end);
-	end);
-end);
+
+    local TweenService = game:GetService("TweenService")
+    local Players = game:GetService("Players")
+    
+    local PlayerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
+    
+    local SCRIPT_URL = "https://gist.githubusercontent.com/AuaqaScripts/048ebb7f2986b702d83416b07967667a/raw/ab920ec38178075c197a62f042563ead75781f4e/Auaqa's%2520Universal%2520Aimbot"
+    local CORRECT_KEY = "8Vjhvmal"
+    local DISCORD_LINK = "https://discord.gg/gsejE5P9fK"
+
+    if PlayerGui:FindFirstChild("LoaderGUI") then
+        PlayerGui:FindFirstChild("LoaderGUI"):Destroy()
+    end
+
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "LoaderGUI"
+    ScreenGui.ResetOnSpawn = false
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    ScreenGui.IgnoreGuiInset = true
+
+    local MainFrame = Instance.new("Frame")
+    MainFrame.Size = UDim2.new(0, 340, 0, 140)
+    MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(30, 32, 40)
+    MainFrame.BackgroundTransparency = 1
+    MainFrame.ClipsDescendants = true
+    MainFrame.Parent = ScreenGui
+    
+    local UIGradient = Instance.new("UIGradient", MainFrame)
+    UIGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(45, 48, 58)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(30, 32, 40))
+    })
+    UIGradient.Rotation = 90
+    
+    local UICorner = Instance.new("UICorner", MainFrame)
+    UICorner.CornerRadius = UDim.new(0, 12)
+    
+    local UIStroke = Instance.new("UIStroke", MainFrame)
+    UIStroke.Color = Color3.fromRGB(90, 95, 110)
+    UIStroke.Thickness = 1
+    UIStroke.Transparency = 1
+
+    local ConfirmationContainer = Instance.new("Frame", MainFrame)
+    ConfirmationContainer.Size = UDim2.new(1, 0, 1, 0)
+    ConfirmationContainer.BackgroundTransparency = 1
+
+    local Title = Instance.new("TextLabel", ConfirmationContainer)
+    Title.Size = UDim2.new(1, -40, 0, 30)
+    Title.Position = UDim2.new(0.5, 0, 0, 20)
+    Title.AnchorPoint = Vector2.new(0.5, 0)
+    Title.BackgroundTransparency = 1
+    Title.Font = Enum.Font.GothamSemibold
+    Title.Text = "Are you sure you want to load this script?"
+    Title.TextColor3 = Color3.fromRGB(230, 230, 240)
+    Title.TextSize = 18
+
+    local Subtitle = Instance.new("TextLabel", ConfirmationContainer)
+    Subtitle.Size = UDim2.new(1, -40, 0, 20)
+    Subtitle.Position = UDim2.new(0.5, 0, 0, 45)
+    Subtitle.AnchorPoint = Vector2.new(0.5, 0)
+    Subtitle.BackgroundTransparency = 1
+    Subtitle.Font = Enum.Font.Gotham
+    Subtitle.Text = "Made By Auaqa"
+    Subtitle.TextColor3 = Color3.fromRGB(150, 155, 170)
+    Subtitle.TextSize = 14
+
+    local ButtonContainer = Instance.new("Frame", ConfirmationContainer)
+    ButtonContainer.Size = UDim2.new(1, -40, 0, 40)
+    ButtonContainer.Position = UDim2.new(0.5, 0, 1, -20)
+    ButtonContainer.AnchorPoint = Vector2.new(0.5, 1)
+    ButtonContainer.BackgroundTransparency = 1
+    
+    local UIListLayout = Instance.new("UIListLayout", ButtonContainer)
+    UIListLayout.FillDirection = Enum.FillDirection.Horizontal
+    UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+    UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+    UIListLayout.Padding = UDim.new(0, 20)
+
+    local YesButton = Instance.new("TextButton", ButtonContainer)
+    YesButton.Size = UDim2.new(0.5, -5, 1, 0)
+    YesButton.BackgroundColor3 = Color3.fromRGB(80, 130, 255)
+    YesButton.Font = Enum.Font.GothamBold
+    YesButton.Text = "Yes"
+    YesButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    YesButton.TextSize = 16
+    Instance.new("UICorner", YesButton).CornerRadius = UDim.new(0, 8)
+
+    local NoButton = Instance.new("TextButton", ButtonContainer)
+    NoButton.Size = UDim2.new(0.5, -5, 1, 0)
+    NoButton.BackgroundColor3 = Color3.fromRGB(70, 75, 90)
+    NoButton.Font = Enum.Font.GothamBold
+    NoButton.Text = "No"
+    NoButton.TextColor3 = Color3.fromRGB(220, 220, 230)
+    NoButton.TextSize = 16
+    Instance.new("UICorner", NoButton).CornerRadius = UDim.new(0, 8)
+
+    ScreenGui.Parent = PlayerGui
+
+    local function animateIn(target)
+        target.Size = UDim2.new(target.Size.X.Scale, target.Size.X.Offset * 0.9, target.Size.Y.Scale, target.Size.Y.Offset * 0.9)
+        local sizeAnim = TweenService:Create(target, TweenInfo.new(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0, 340, 0, 140)})
+        local fadeAnim = TweenService:Create(target, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {BackgroundTransparency = 0})
+        local strokeAnim = TweenService:Create(UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {Transparency = 0.6})
+        sizeAnim:Play()
+        fadeAnim:Play()
+        strokeAnim:Play()
+    end
+    
+    local function animateOut(target, callback)
+        local sizeAnim = TweenService:Create(target, TweenInfo.new(0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.In), {Size = UDim2.new(target.Size.X.Scale, target.Size.X.Offset * 0.9, target.Size.Y.Scale, target.Size.Y.Offset * 0.9)})
+        local fadeAnim = TweenService:Create(target, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {BackgroundTransparency = 1})
+        local strokeAnim = TweenService:Create(UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {Transparency = 1})
+        sizeAnim:Play()
+        fadeAnim:Play()
+        strokeAnim:Play()
+        fadeAnim.Completed:Connect(callback)
+    end
+    
+    local function showPopoutMessage(message, color)
+        local PopoutFrame = Instance.new("Frame")
+        PopoutFrame.Name = "PopoutMessage"
+        PopoutFrame.Size = UDim2.new(0, 280, 0, 50)
+        PopoutFrame.Position = UDim2.new(1, PopoutFrame.Size.X.Offset + 10, 1, -40)
+        PopoutFrame.AnchorPoint = Vector2.new(1, 1)
+        PopoutFrame.BackgroundColor3 = Color3.fromRGB(30, 32, 40)
+        PopoutFrame.BackgroundTransparency = 0
+        PopoutFrame.Parent = ScreenGui
+
+        local PopoutText = Instance.new("TextLabel")
+        PopoutText.Size = UDim2.new(1, 0, 1, 0)
+        PopoutText.BackgroundTransparency = 1
+        PopoutText.Font = Enum.Font.Gotham
+        PopoutText.Text = message
+        PopoutText.TextColor3 = color or Color3.fromRGB(230, 230, 240)
+        PopoutText.TextSize = 16
+        PopoutText.TextXAlignment = Enum.TextXAlignment.Center
+        PopoutText.TextYAlignment = Enum.TextYAlignment.Center
+        PopoutText.Parent = PopoutFrame
+
+        Instance.new("UICorner", PopoutFrame).CornerRadius = UDim.new(0, 8)
+        Instance.new("UIStroke", PopoutFrame).Color = Color3.fromRGB(90, 95, 110)
+        
+        local slideInTween = TweenService:Create(PopoutFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.Out), {Position = UDim2.new(1, -10, 1, -40)})
+        slideInTween:Play()
+
+        task.wait(3)
+
+        local slideOutTween = TweenService:Create(PopoutFrame, TweenInfo.new(0.5, Enum.EasingStyle.Quart, Enum.EasingDirection.In), {Position = UDim2.new(1, PopoutFrame.Size.X.Offset + 10, 1, -40)})
+        local fadeOutTextTween = TweenService:Create(PopoutText, TweenInfo.new(0.5, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), {TextTransparency = 1})
+
+        slideOutTween:Play()
+        fadeOutTextTween:Play()
+
+        slideOutTween.Completed:Connect(function()
+            PopoutFrame:Destroy()
+        end)
+    end
+    
+    local function showWrongKeyMessage()
+        showPopoutMessage("Wrong key", Color3.fromRGB(255, 80, 80))
+    end
+
+    animateIn(MainFrame)
+
+    NoButton.MouseButton1Click:Connect(function()
+        animateOut(MainFrame, function()
+            ScreenGui:Destroy()
+        end)
+    end)
+
+    YesButton.MouseButton1Click:Connect(function()
+        YesButton.AutoButtonColor = false
+        NoButton.AutoButtonColor = false
+        
+        local fadeOutInfo = TweenInfo.new(0.3)
+        for _, child in ipairs(ConfirmationContainer:GetDescendants()) do
+            if child:IsA("TextLabel") or child:IsA("TextButton") then
+                TweenService:Create(child, fadeOutInfo, {TextTransparency = 1}):Play()
+            end
+            if child:IsA("TextButton") then
+                TweenService:Create(child, fadeOutInfo, {BackgroundTransparency = 1}):Play()
+            end
+        end
+        
+        task.wait(fadeOutInfo.Time)
+        ConfirmationContainer:Destroy()
+        
+        local KeySystemContainer = Instance.new("Frame", MainFrame)
+        KeySystemContainer.Size = UDim2.new(1, 0, 1, 0)
+        
+        KeySystemContainer.BackgroundColor3 = Color3.fromRGB(25, 27, 34)
+        KeySystemContainer.BackgroundTransparency = 0
+        
+        local KeyUIGradient = Instance.new("UIGradient", KeySystemContainer)
+        KeyUIGradient.Color = UIGradient.Color
+        KeyUIGradient.Rotation = UIGradient.Rotation
+        
+        local KeyUICorner = Instance.new("UICorner", KeySystemContainer)
+        KeyUICorner.CornerRadius = UICorner.CornerRadius
+
+        local KeyUIStroke = Instance.new("UIStroke", KeySystemContainer)
+        KeyUIStroke.Color = UIStroke.Color
+        KeyUIStroke.Thickness = UIStroke.Thickness
+        KeyUIStroke.Transparency = UIStroke.Transparency
+        
+        local KeyTitle = Instance.new("TextLabel", KeySystemContainer)
+        KeyTitle.Size = UDim2.new(1, -40, 0, 30)
+        KeyTitle.Position = UDim2.new(0.5, 0, 0, 20)
+        KeyTitle.AnchorPoint = Vector2.new(0.5, 0)
+        KeyTitle.BackgroundTransparency = 1
+        KeyTitle.Font = Enum.Font.GothamSemibold
+        KeyTitle.Text = "Key System"
+        KeyTitle.TextColor3 = Color3.fromRGB(230, 230, 240)
+        KeyTitle.TextSize = 18
+
+        local KeyStatus = Instance.new("TextLabel", KeySystemContainer)
+        KeyStatus.Size = UDim2.new(1, -40, 0, 20)
+        KeyStatus.Position = UDim2.new(0.5, 0, 0, 45)
+        KeyStatus.AnchorPoint = Vector2.new(0.5, 0)
+        KeyStatus.BackgroundTransparency = 1
+        KeyStatus.Font = Enum.Font.Gotham
+        KeyStatus.Text = ""
+        KeyStatus.TextColor3 = Color3.fromRGB(150, 155, 170)
+        KeyStatus.TextSize = 14
+
+        local KeyInput = Instance.new("TextBox", KeySystemContainer)
+        KeyInput.Size = UDim2.new(1, -40, 0, 40)
+        KeyInput.Position = UDim2.new(0.5, 0, 0.5, -25)
+        KeyInput.AnchorPoint = Vector2.new(0.5, 0.5)
+        KeyInput.BackgroundColor3 = Color3.fromRGB(45, 48, 58)
+        KeyInput.BackgroundTransparency = 0
+        KeyInput.PlaceholderText = "Enter key here"
+        KeyInput.PlaceholderColor3 = Color3.fromRGB(150, 155, 170)
+        KeyInput.TextColor3 = Color3.fromRGB(230, 230, 240)
+        KeyInput.TextSize = 16
+        KeyInput.Font = Enum.Font.Gotham
+        Instance.new("UICorner", KeyInput).CornerRadius = UDim.new(0, 8)
+
+        local KeyButtonContainer = Instance.new("Frame", KeySystemContainer)
+        KeyButtonContainer.Size = UDim2.new(1, -40, 0, 40)
+        KeyButtonContainer.Position = UDim2.new(0.5, 0, 0.5, 25)
+        KeyButtonContainer.AnchorPoint = Vector2.new(0.5, 0.5)
+        KeyButtonContainer.BackgroundTransparency = 1
+        
+        local KeyUIListLayout = Instance.new("UIListLayout", KeyButtonContainer)
+        KeyUIListLayout.FillDirection = Enum.FillDirection.Horizontal
+        KeyUIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+        KeyUIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+        KeyUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        KeyUIListLayout.Padding = UDim.new(0, 20)
+
+        local GetKeyButton = Instance.new("TextButton", KeyButtonContainer)
+        GetKeyButton.Size = UDim2.new(0.5, -5, 1, 0)
+        GetKeyButton.BackgroundTransparency = 0
+        GetKeyButton.BackgroundColor3 = Color3.fromRGB(80, 130, 255)
+        GetKeyButton.Font = Enum.Font.GothamBold
+        GetKeyButton.Text = "Get Key"
+        GetKeyButton.TextTransparency = 0
+        GetKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        GetKeyButton.TextSize = 16
+        Instance.new("UICorner", GetKeyButton).CornerRadius = UDim.new(0, 8)
+
+        local CheckKeyButton = Instance.new("TextButton", KeyButtonContainer)
+        CheckKeyButton.Size = UDim2.new(0.5, -5, 1, 0)
+        CheckKeyButton.BackgroundTransparency = 0
+        CheckKeyButton.BackgroundColor3 = Color3.fromRGB(70, 75, 90)
+        CheckKeyButton.Font = Enum.Font.GothamBold
+        CheckKeyButton.Text = "Check Key"
+        CheckKeyButton.TextTransparency = 0
+        CheckKeyButton.TextColor3 = Color3.fromRGB(220, 220, 230)
+        CheckKeyButton.TextSize = 16
+        Instance.new("UICorner", CheckKeyButton).CornerRadius = UDim.new(0, 8)
+
+        local fadeInInfo = TweenInfo.new(0.5)
+        TweenService:Create(KeySystemContainer, fadeInInfo, {BackgroundTransparency = 0}):Play()
+
+        GetKeyButton.MouseButton1Click:Connect(function()
+            if setclipboard then
+                setclipboard(DISCORD_LINK)
+                showPopoutMessage("Copied link to clipboard")
+            else
+                KeyStatus.Text = "Your exploit does not support setclipboard()."
+                KeyStatus.TextColor3 = Color3.fromRGB(255, 80, 80)
+                task.wait(2)
+                KeyStatus.Text = ""
+                KeyStatus.TextColor3 = Color3.fromRGB(150, 155, 170)
+            end
+        end)
+
+        CheckKeyButton.MouseButton1Click:Connect(function()
+            if KeyInput.Text == CORRECT_KEY then
+                KeyStatus.Text = "Key Verified! Loading script..."
+                KeyStatus.TextColor3 = Color3.fromRGB(80, 255, 130)
+                
+                local function startLoadingProcess()
+                    local fadeOutInfo2 = TweenInfo.new(0.3)
+                    for _, child in ipairs(KeySystemContainer:GetDescendants()) do
+                        if child:IsA("TextLabel") or child:IsA("TextButton") or child:IsA("TextBox") then
+                            TweenService:Create(child, fadeOutInfo2, {TextTransparency = 1, BackgroundTransparency = 1}):Play()
+                        end
+                    end
+                    task.wait(fadeOutInfo2.Time)
+                    KeySystemContainer:Destroy()
+
+                    local LoadingContainer = Instance.new("Frame", MainFrame)
+                    LoadingContainer.Size = UDim2.new(1, 0, 1, 0)
+                    LoadingContainer.BackgroundTransparency = 1
+                    
+                    TweenService:Create(MainFrame, TweenInfo.new(0.4), {Size = UDim2.new(0, 280, 0, 80)}):Play()
+
+                    local ProgressText = Instance.new("TextLabel", LoadingContainer)
+                    ProgressText.Size = UDim2.new(1, -40, 0, 30)
+                    ProgressText.Position = UDim2.new(0.5, 0, 0.5, -10)
+                    ProgressText.AnchorPoint = Vector2.new(0.5, 0.5)
+                    ProgressText.BackgroundTransparency = 1
+                    ProgressText.Font = Enum.Font.Gotham
+                    ProgressText.Text = "Initializing..."
+                    ProgressText.TextColor3 = Color3.fromRGB(230, 230, 240)
+                    ProgressText.TextTransparency = 1
+                    ProgressText.TextSize = 18
+
+                    local ProgressBarBG = Instance.new("Frame", LoadingContainer)
+                    ProgressBarBG.Size = UDim2.new(1, -40, 0, 8)
+                    ProgressBarBG.Position = UDim2.new(0.5, 0, 0.5, 15)
+                    ProgressBarBG.AnchorPoint = Vector2.new(0.5, 0.5)
+                    ProgressBarBG.BackgroundColor3 = Color3.fromRGB(20, 22, 28)
+                    ProgressBarBG.BackgroundTransparency = 1
+                    Instance.new("UICorner", ProgressBarBG).CornerRadius = UDim.new(1, 0)
+
+                    local ProgressBar = Instance.new("Frame", ProgressBarBG)
+                    ProgressBar.Size = UDim2.new(0, 0, 1, 0)
+                    ProgressBar.BackgroundColor3 = Color3.fromRGB(80, 130, 255)
+                    Instance.new("UICorner", ProgressBar).CornerRadius = UDim.new(1, 0)
+                    
+                    local fadeInInfo2 = TweenInfo.new(0.5)
+                    TweenService:Create(ProgressText, fadeInInfo2, {TextTransparency = 0}):Play()
+                    TweenService:Create(ProgressBarBG, fadeInInfo2, {BackgroundTransparency = 0}):Play()
+                    
+                    task.wait(0.5)
+                    
+                    local progressAnim = TweenService:Create(ProgressBar, TweenInfo.new(10, Enum.EasingStyle.Linear), {Size = UDim2.new(1, 0, 1, 0)})
+                    progressAnim:Play()
+                    progressAnim.Completed:Wait()
+
+                    ProgressText.Text = "Complete!"
+
+                    task.wait(2)
+
+                    animateOut(MainFrame, function()
+                        ScreenGui:Destroy()
+                        print("Neat UI Loader: UI closed. Loading main script now...")
+                        
+                        local getSuccess, scriptSource = pcall(function()
+                            return game:HttpGet(SCRIPT_URL)
+                        end)
+
+                        if getSuccess and scriptSource then
+                            local loadSuccess, loadError = pcall(loadstring(scriptSource))
+                            if not loadSuccess then
+                                warn("Neat UI Loader: Error executing main script:", loadError)
+                            else
+                                print("Neat UI Loader: Main script executed successfully.")
+                            end
+                        else
+                            warn("Neat UI Loader: Failed to download script from URL:", scriptSource)
+                        end
+                    end)
+                end
+                
+                startLoadingProcess()
+            else
+                showWrongKeyMessage()
+                KeyStatus.Text = ""
+            end
+        end)
+    end)
+
+end)
+
 if not success then
-	warn("Neat UI Loader Error: " .. tostring(err));
+    warn("Neat UI Loader Error: " .. tostring(err))
 end
